@@ -1,0 +1,90 @@
+{% load static %}
+<link href="{% static 'Aqua_label/css/main.css' %}" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+</head>
+<body>
+        <header class="masthead">
+            <div class="container">
+                <div class="masthead-subheading">Welcome To Our</div>
+                <div class="masthead-heading text-uppercase">AQUA Label</div>
+                <a class="btn btn-primary btn-xl text-uppercase" href="#portfolio">View participants</a>
+            </div>
+        </header>
+        <!-- Portfolio Grid-->
+        <section class="page-section bg-light" id="portfolio">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">List of participants</h2>
+                    <h3 class="section-subheading text-muted">The most talented</h3>
+                </div>
+                <div class="row">
+                    {% for el in Items %}
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{ el.id_artist }}">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="{% static '' %}Aqua_label/img/{{ el.id_artist }}.jpg" alt="..." />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">{{ el.nickname }}</div>
+                                <div class="portfolio-caption-subheading text-muted">{{ el.id_genre.name }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a class="btn btn-primary btn-xl text-uppercase" href="events/">View upcoming events</a>
+                <a class="btn btn-primary btn-xl text-uppercase" href="functions/">Functions & Procedures</a>
+            </div>
+        </section>
+        {% for el in Items %}
+        <div class="portfolio-modal modal fade" id="portfolioModal{{ el.id_artist }}" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><i class="bi bi-x-lg" style="font-size: 50px;"></i></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h2 class="text-uppercase">{{ el.nickname }}</h2>
+                                    <img class="img-fluid d-block mx-auto" src="{% static '' %}Aqua_label/img/{{ el.id_artist }}.jpg" alt="..." />
+                                    <ul class="list-inline">
+                                        <li>
+                                            <strong>Real name:</strong>
+                                            <p>{{ el.fcs }}</p>
+                                        </li>
+                                        <li>
+                                            <strong>Manager's contacts:</strong>
+                                            <p>{{ el.id_manager.mail }}<br />{{ el.id_manager.contact_number }}</p>
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-xmark me-1"></i>
+                                        Close Page
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'Aqua_label/js/scripts.js' %}"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+</html>
